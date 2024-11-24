@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'routes/appRouteConfig.dart';
 import 'package:provider/provider.dart';
 import 'package:expense_tracker/modals/themeProvider.dart';
+import 'package:expense_tracker/modals/mythemeData.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +34,9 @@ class _MyAppState extends State<MyApp> {
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
           return MaterialApp.router(
-            // theme: MyThemeData().lightMode,
-            // darkTheme: MyThemeData().darkMode,
-            // themeMode: themeProvider.themeMode,
+            theme: MyThemeData().lightMode,
+            darkTheme: MyThemeData().darkMode,
+            themeMode: themeProvider.themeMode,
             debugShowCheckedModeBanner: false,
             routerConfig: _routerConfig,
           );

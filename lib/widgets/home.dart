@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/modals/expenseModal.dart';
+import 'expenseView.dart';
 
 class HomeWidget extends StatefulWidget {
   HomeWidget({super.key});
@@ -9,39 +9,6 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final Map<String, List<dynamic>> expenseTile = {
-    "tileName": [
-      "Personal",
-      "Education",
-      "Food",
-      "Transport",
-      "Personal",
-      "Education",
-      "Food",
-      "Transport",
-      "Transport",
-      "Personal",
-      "Education",
-      "Food",
-      "Transport"
-    ],
-    "tileColor": [
-      Colors.blue,
-      Colors.yellow,
-      Colors.pink,
-      Colors.teal,
-      Colors.blue,
-      Colors.yellow,
-      Colors.pink,
-      Colors.teal,
-      Colors.blue,
-      Colors.yellow,
-      Colors.pink,
-      Colors.teal,
-      Colors.cyan
-    ]
-  };
-
   int selectedindex = 0;
 
   final PageController pageController = PageController();
@@ -51,6 +18,12 @@ class _HomeWidgetState extends State<HomeWidget> {
       selectedindex = index;
       pageController.jumpToPage(index);
     });
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose(); // Dispose of PageController
+    super.dispose();
   }
 
   @override
@@ -71,42 +44,15 @@ class _HomeWidgetState extends State<HomeWidget> {
             });
           },
           children: [
-            GridView.builder(
-              itemCount: expenseTile["tileName"]!.length,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 20
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 2.2 / 3,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-              ),
-              itemBuilder: (ctx, index) {
-                return Card(
-                    color: expenseTile["tileColor"]![index],
-                    elevation: 10,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(expenseTile["tileName"]![index]),
-                        Icon(Icons.adb_sharp),
-                        Text("\$ 2000")
-                      ],
-                    )
-                );
-              },
-            ),
+            ExpenseView(
+                key: ValueKey("expense-${selectedindex}"), // Unique key
+                view:"expense"),
+            ExpenseView(
+                key: ValueKey("expense-${selectedindex}"), // Unique key
+                view:"income"),
             Center(
               child: Text(
-                "Page-2",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-            ),
-            Center(
-              child: Text(
-                "Page-3",
+                "Transaction",
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
             ),
