@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/modals/expenseModal.dart';
+import 'package:go_router/go_router.dart';
 
 class ExpenseView extends StatelessWidget {
   final String view;
@@ -8,12 +9,14 @@ class ExpenseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var expense = (this.view == "expense") ? expenseList : incomeList;
+    // Determine whether to show expenses or income based on `view`
+    var expense = (view == "expense") ? expenseList : incomeList;
+
     return GridView.builder(
-      itemCount: expenseList.length,
-      padding: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20
+      itemCount: expense.length, // Use the correct list length
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -22,15 +25,21 @@ class ExpenseView extends StatelessWidget {
         mainAxisSpacing: 15,
       ),
       itemBuilder: (ctx, index) {
-        return Card(
-            color: expense[index].colorName,
+        final clickedTile = expense[index];
+        return GestureDetector(
+          onTap: () {
+            // Use the clicked tile's data for navigation
+            context.push("/addtransaction/$view/${clickedTile.name}");
+          },
+          child: Card(
+            color: clickedTile.colorName,
             elevation: 10,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  expense[index].name,
-                  style: TextStyle(
+                  clickedTile.name,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
@@ -38,24 +47,24 @@ class ExpenseView extends StatelessWidget {
                   ),
                 ),
                 IconTheme(
-                  data: IconThemeData(
-                    // color: darkenColor(expense[index].colorName),
+                  data: const IconThemeData(
                     color: Colors.black54,
-                    size: 30,          // Set the icon size
+                    size: 30, // Set the icon size
                   ),
-                  child: expense[index].iconName,
+                  child: clickedTile.iconName,
                 ),
                 Text(
-                    expense[index].amount.toString(),
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      overflow: TextOverflow.ellipsis,
+                  clickedTile.amount.toString(),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                )
+                ),
               ],
-            )
+            ),
+          ),
         );
       },
     );

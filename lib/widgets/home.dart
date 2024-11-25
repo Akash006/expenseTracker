@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:expense_tracker/views/transcationView.dart';
 import 'expenseView.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -33,8 +34,15 @@ class _HomeWidgetState extends State<HomeWidget> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Expense Tracker'),
+          title: const Text(
+              'Expense Tracker',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          // centerTitle: false,
           backgroundColor: Colors.blue[400],
+          elevation: 10,
         ),
         body: PageView(
           controller: pageController,
@@ -50,12 +58,13 @@ class _HomeWidgetState extends State<HomeWidget> {
             ExpenseView(
                 key: ValueKey("expense-${selectedindex}"), // Unique key
                 view:"income"),
-            Center(
-              child: Text(
-                "Transaction",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-            ),
+            // Center(
+            //   child: Text(
+            //     "Transaction",
+            //     style: Theme.of(context).textTheme.headlineLarge,
+            //   ),
+            // ),
+            StickyHeaderWithList()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
