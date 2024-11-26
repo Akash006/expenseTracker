@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:expense_tracker/widgets/addTranscationWidget.dart';
+
 class Addtranscations extends StatelessWidget {
 
   final String type;
@@ -13,9 +15,7 @@ class Addtranscations extends StatelessWidget {
       appBar: AppBar(
         title: Text("Add $type"),
       ),
-      body: Center(
-        child: Text("$type -> $category"),
-      ),
+      body: AddTranscationWidget(),
     );
   }
 }
