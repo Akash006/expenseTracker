@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddTranscationWidget extends StatefulWidget {
   const AddTranscationWidget({super.key});
@@ -36,9 +37,11 @@ class _AddTranscationWidgetState extends State<AddTranscationWidget> {
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(),
+              const SizedBox(
+                height: 200,
+              ),
               SizedBox(
                 width: 275, // Adjust the width as needed
                 child: TextField(
@@ -48,10 +51,16 @@ class _AddTranscationWidgetState extends State<AddTranscationWidget> {
                   autofocus: true,
                   decoration: InputDecoration(
                     hintText: "0",
-                    border: OutlineInputBorder(
+                    hintStyle: TextStyle(
+                      color: Colors.grey
+                    ),
+                    border: UnderlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(
-                        width: 1.5,
+                      borderSide: BorderSide(
+                        color: Theme
+                            .of(context)
+                            .primaryColor,
+                        width: 2.0,
                       ),
                     ),
                     focusedBorder: UnderlineInputBorder(
@@ -70,6 +79,10 @@ class _AddTranscationWidgetState extends State<AddTranscationWidget> {
                       vertical: 15,
                     ),
                     prefixText: "\$ ",
+                    prefixStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24
+                    )
                   ),
                   style: TextStyle(
                     fontSize: 24,
@@ -77,6 +90,7 @@ class _AddTranscationWidgetState extends State<AddTranscationWidget> {
                   ),
                 ),
               ),
+              Expanded(child: Container()),
               if (_focus.hasFocus)
                 NumericKeypad(
                   controller: textController,
@@ -138,6 +152,15 @@ class _NumericKeypadState extends State<NumericKeypad> {
             _buildButton('2'),
             _buildButton('3'),
             _buildButton('⌫', onPressed: _backspace),
+            // Container(
+            //   child: IconButton(
+            //     onPressed: _backspace,
+            //     icon: Icon(
+            //       Icons.backspace_outlined,
+            //       // size: 40,
+            //     ),
+            //   )
+            // )
           ],
         ),
         Row(
@@ -178,21 +201,27 @@ class _NumericKeypadState extends State<NumericKeypad> {
       child: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: 4,
-          vertical: 2
+          vertical: 4
         ),
-        child: TextButton(
-          onPressed: onPressed ?? () => _input(text),
-          child: Text(text),
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.blue,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            textStyle: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+        child: SizedBox(
+          height: 60,
+          child: TextButton(
+            onPressed: onPressed ?? () => _input(text),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.blue.shade900,
+              backgroundColor: Colors.grey.shade100,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
         ),
@@ -202,7 +231,6 @@ class _NumericKeypadState extends State<NumericKeypad> {
 
   void _input(String text) {
     int position = _selection.base.offset;
-
     var value = _controller.text;
     if (value.isNotEmpty) {
       var suffix = value.substring(position, value.length);
@@ -224,7 +252,6 @@ class _NumericKeypadState extends State<NumericKeypad> {
     if (value.isNotEmpty && position != 0) {
       var suffix = value.substring(position, value.length);
       _controller.text = value.substring(0, position - 1) + suffix;
-
       _controller.selection =
           TextSelection.fromPosition(TextPosition(offset: position - 1));
     }
