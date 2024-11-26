@@ -36,10 +36,11 @@ class _AddTranscationWidgetState extends State<AddTranscationWidget> {
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              const SizedBox(),
               SizedBox(
-                width: 300, // Adjust the width as needed
+                width: 275, // Adjust the width as needed
                 child: TextField(
                   controller: textController,
                   keyboardType: TextInputType.none,
@@ -70,15 +71,17 @@ class _AddTranscationWidgetState extends State<AddTranscationWidget> {
                     ),
                     prefixText: "\$ ",
                   ),
+                  style: TextStyle(
+                    fontSize: 24,
+                    overflow: TextOverflow.ellipsis
+                  ),
                 ),
               ),
-              const Spacer(),
-              _focus.hasFocus
-                  ? NumericKeypad(
-                controller: textController,
-                focusNode: _focus,
-              )
-                  : Container(),
+              if (_focus.hasFocus)
+                NumericKeypad(
+                  controller: textController,
+                  focusNode: _focus,
+                ),
             ],
           ),
         ),
