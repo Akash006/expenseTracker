@@ -120,6 +120,7 @@ class _NumericKeypadState extends State<NumericKeypad> {
   late TextSelection _selection;
   late FocusNode _focusNode;
   String temp = '';
+  bool isOperation = false;
 
   @override
   void initState() {
@@ -152,15 +153,6 @@ class _NumericKeypadState extends State<NumericKeypad> {
             _buildButton('2'),
             _buildButton('3'),
             _buildButton('⌫', onPressed: _backspace),
-            // Container(
-            //   child: IconButton(
-            //     onPressed: _backspace,
-            //     icon: Icon(
-            //       Icons.backspace_outlined,
-            //       // size: 40,
-            //     ),
-            //   )
-            // )
           ],
         ),
         Row(
@@ -178,7 +170,7 @@ class _NumericKeypadState extends State<NumericKeypad> {
             _buildButton('7'),
             _buildButton('8'),
             _buildButton('9'),
-            _buildButton('-/D')
+            _buildButton('-/÷')
           ],
         ),
         Row(
@@ -187,7 +179,7 @@ class _NumericKeypadState extends State<NumericKeypad> {
             _buildButton('⇓', onPressed: _hideKeyboard),
             _buildButton('0'),
             _buildButton('.'),
-            _buildButton('T'),
+            isOperation ? _buildButton("=") : _buildButton("✔"),
           ],
         ),
       ],
@@ -195,6 +187,7 @@ class _NumericKeypadState extends State<NumericKeypad> {
   }
 
   _hideKeyboard() => _focusNode.unfocus();
+  bool isUsed = true;
 
   Widget _buildButton(String text, {VoidCallback? onPressed}) {
     return Expanded(
@@ -206,7 +199,26 @@ class _NumericKeypadState extends State<NumericKeypad> {
         child: SizedBox(
           height: 60,
           child: TextButton(
-            onPressed: onPressed ?? () => _input(text),
+            // onPressed: _input(text),
+            onLongPress: (){
+              if(text == "-/÷"){
+                _input("/");
+              }
+              else if(text == "+/*"){
+                _input("*");
+              }
+            },
+            onPressed: onPressed ?? (){
+              if (text == "-/÷"){
+                _input("-");
+              }
+              else if(text == "+/*"){
+                _input("+");
+              }
+              else{
+                _input(text);
+              }
+            },
             child: Text(
               text,
               style: const TextStyle(
@@ -244,16 +256,36 @@ class _NumericKeypadState extends State<NumericKeypad> {
       _controller.selection =
           TextSelection.fromPosition(const TextPosition(offset: 1));
     }
+    _toggleCheckAndEqual(value);
+  }
+
+  void _toggleCheckAndEqual(String value){
+    if(value.contains(RegExp('[+\-/*]'))){
+      setState(() {
+        isOperation = true;
+      });
+    }
+    else {
+      setState(() {
+        isOperation = false;
+      });
+    }
   }
 
   void _backspace() {
     int position = _selection.base.offset;
     final value = _controller.text;
+
     if (value.isNotEmpty && position != 0) {
       var suffix = value.substring(position, value.length);
       _controller.text = value.substring(0, position - 1) + suffix;
       _controller.selection =
           TextSelection.fromPosition(TextPosition(offset: position - 1));
     }
+    _toggleCheckAndEqual(_controller.text);
+  }
+
+  void _submit(){
+    final value = _controller.text;
   }
 }
