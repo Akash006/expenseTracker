@@ -1,14 +1,16 @@
+import 'package:expense_tracker/routes/appRouteConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
-class AddTranscationWidget extends StatefulWidget {
-  const AddTranscationWidget({super.key});
+class AddTransactionWidget extends StatefulWidget {
+  const AddTransactionWidget({super.key});
 
   @override
-  State<AddTranscationWidget> createState() => _AddTranscationWidgetState();
+  State<AddTransactionWidget> createState() => _AddTransactionWidgetState();
 }
 
-class _AddTranscationWidgetState extends State<AddTranscationWidget> {
+class _AddTransactionWidgetState extends State<AddTransactionWidget> {
   final FocusNode _focus = FocusNode();
   TextEditingController textController = TextEditingController();
 
@@ -78,7 +80,7 @@ class _AddTranscationWidgetState extends State<AddTranscationWidget> {
                       horizontal: 20,
                       vertical: 15,
                     ),
-                    prefixText: "\$ ",
+                    prefixText: "₹ ",
                     prefixStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 24
@@ -215,6 +217,12 @@ class _NumericKeypadState extends State<NumericKeypad> {
               else if(text == "+/*"){
                 _input("+");
               }
+              else if(text == "="){
+                _calculate();
+              }
+              else if(text == "✔"){
+                _submit();
+              }
               else{
                 _input(text);
               }
@@ -285,7 +293,48 @@ class _NumericKeypadState extends State<NumericKeypad> {
     _toggleCheckAndEqual(_controller.text);
   }
 
+  void _calculate(){
+    final expression = _controller.text;
+    final operatorPattern = RegExp(r'[+\-*/]');
+
+    // Break expression into numbers and operators
+    final numbers = expression.split(operatorPattern).map(int.parse).toList();
+    final operators = operatorPattern.allMatches(expression).map((m) => m.group(0)!).toList();
+
+    // Apply precedence: first *, / then +, -
+    while (operators.contains('*') || operators.contains('/')) {
+      for (int i = 0; i < operators.length; i++) {
+        if (operators[i] == '*' || operators[i] == '/') {
+          final op = operators.removeAt(i);
+          final left = numbers.removeAt(i);
+          final right = numbers.removeAt(i);
+          final result = op == '*' ? left * right : left ~/ right;
+          numbers.insert(i, result);
+          break; // Restart loop for updated operators
+        }
+      }
+    }
+
+    while (operators.contains('+') || operators.contains('-')) {
+      for (int i = 0; i < operators.length; i++) {
+        if (operators[i] == '+' || operators[i] == '-') {
+          final op = operators.removeAt(i);
+          final left = numbers.removeAt(i);
+          final right = numbers.removeAt(i);
+          final result = op == '+' ? left + right : left - right;
+          numbers.insert(i, result);
+          break; // Restart loop for updated operators
+        }
+      }
+    }
+
+    // Final result is the only number left
+    _controller.text = numbers[0].toString();
+    _toggleCheckAndEqual(_controller.text);
+  }
+
   void _submit(){
     final value = _controller.text;
+    context.pop(value);
   }
 }

@@ -15,7 +15,7 @@ class Addtranscations extends StatelessWidget {
       appBar: AppBar(
         title: Text("Add $type"),
       ),
-      body: AddTranscationWidget(),
+      body: AddTransactionWidget(),
     );
   }
 }

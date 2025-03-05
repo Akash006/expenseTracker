@@ -58,13 +58,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             ExpenseView(
                 key: ValueKey("expense-${selectedindex}"), // Unique key
                 view:"income"),
-            // Center(
-            //   child: Text(
-            //     "Transaction",
-            //     style: Theme.of(context).textTheme.headlineLarge,
-            //   ),
-            // ),
-            StickyHeaderWithList()
+            TransactionScreen()
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

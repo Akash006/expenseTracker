@@ -18,7 +18,7 @@ class MyAppRouter {
       GoRoute(
         name: MyAppRouteConstants.transactionViewRouteName,
         path: '/transactionView',
-        builder: (context, state) => StickyHeaderWithList(),
+        builder: (context, state) => TransactionScreen(),
       ),
       GoRoute(
         path: '/addtransaction/:type/:category',

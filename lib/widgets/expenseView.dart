@@ -51,10 +51,10 @@ class ExpenseView extends StatelessWidget {
                     color: Colors.black54,
                     size: 30, // Set the icon size
                   ),
-                  child: clickedTile.iconName,
+                  child: Icon(clickedTile.iconName),
                 ),
                 Text(
-                  clickedTile.amount.toString(),
+                  "200",
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,
