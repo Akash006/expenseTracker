@@ -43,55 +43,55 @@ class _TransactionScreenState extends State<TransactionScreen> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            expandedHeight: 250.0, // Increased height
-            floating: true,
-            pinned: true,
+            backgroundColor: Colors.grey.shade300,
             elevation: 10,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              titlePadding: EdgeInsets.all(10),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.arrow_upward, color: Colors.green, size: 18),
-                      SizedBox(width: 4.0),
-                      Text(
-                        'Income: \$${totalIncome.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.0),
+            shadowColor: Colors.grey.shade400,
+            pinned: true,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                        Icons.arrow_upward,
+                        color: Colors.green,
+                        size: 24,
+                    ),
+                    SizedBox(width: 4.0),
+                    Text(
+                      'Income: \$${totalIncome.toStringAsFixed(2)}',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 2.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.arrow_downward, color: Colors.red, size: 18),
-                      SizedBox(width: 4.0),
-                      Text(
-                        'Expense: \$${totalExpense.toStringAsFixed(2)}',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.0),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              background: Text(
-                'Transactions',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                  color: Colors.white,
+                    ),
+                  ],
                 ),
-              ),
+                SizedBox(
+                  width: 8.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                        Icons.arrow_downward,
+                        color: Colors.red,
+                        size: 24,
+                    ),
+                    SizedBox(width: 4.0),
+                    Text(
+                      'Expense: \$${totalExpense.toStringAsFixed(2)}',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           SliverList(
