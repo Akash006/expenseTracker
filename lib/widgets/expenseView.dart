@@ -48,7 +48,7 @@ class ExpenseView extends StatelessWidget {
                 ),
                 IconTheme(
                   data: const IconThemeData(
-                    color: Colors.black54,
+                    color: Colors.black87,
                     size: 30, // Set the icon size
                   ),
                   child: Icon(clickedTile.iconName),
@@ -56,7 +56,7 @@ class ExpenseView extends StatelessWidget {
                 Text(
                   "200",
                   style: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.black87,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis,

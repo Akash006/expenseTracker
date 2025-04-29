@@ -7,7 +7,7 @@ class MyThemeData {
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.dark,
-      backgroundColor: Colors.blue.shade800,
+      // backgroundColor: Colors.blue.shade800,
       centerTitle: true,
       elevation: 10,
       iconTheme: IconThemeData(
@@ -102,7 +102,7 @@ class MyThemeData {
 
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
-      backgroundColor: Colors.indigo.shade800,
+      // backgroundColor: Colors.indigo.shade800,
       centerTitle: true,
       elevation: 10,
       iconTheme: IconThemeData(

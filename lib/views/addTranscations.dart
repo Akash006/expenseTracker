@@ -14,6 +14,12 @@ class Addtranscations extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add $type"),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(5.0),
+              bottomRight: Radius.circular(5.0),
+            )
+        ),
       ),
       body: AddTransactionWidget(),
     );

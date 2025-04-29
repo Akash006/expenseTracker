@@ -136,28 +136,47 @@ class TransactionItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            child: Text(DateFormat('dd-MMM-yyyy EEE').format(date),
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700
+          Row(
+            children: [
+              Container(
+                // width: double.infinity,
+                child: Text(DateFormat('dd-MMM-yyyy').format(date),
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal
+                  ),
+                ),
               ),
-            ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                // width: double.infinity,
+                child: Text(DateFormat('EEE').format(date),
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w800
+                  ),
+                ),
+              ),
+            ],
           ),
           ...transactionList.map((transaction){
             return ListTile(
+              visualDensity: VisualDensity.compact,
+
               leading: Icon(
                   transaction.modalType.iconName,
-                size: 26,
+                size: 24,
               ),
               title: Text(transaction.modalType.name),
               subtitle: Text(transaction.description),
               trailing: Text(
                   "\$ "+transaction.amount.toString(),
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold
                 ),
               ),
