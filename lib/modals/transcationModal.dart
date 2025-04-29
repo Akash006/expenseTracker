@@ -46,6 +46,7 @@ class TransactionModal {
       for (var key in sortedKeys) key: groupedTransactions[key]!,
     };
 
+    // print(sortedGroupedTransactions);
     return sortedGroupedTransactions;
   }
 
@@ -60,7 +61,7 @@ class TransactionModal {
     TransactionModal(
       modalType: getExpenseByName("Fuel"),
       amount: 20.0,
-      transactionDateTime: DateTime(2024, 11, 25, 12, 45),
+      transactionDateTime: DateTime(2024, 11, 25, 10, 30),
       isIncome: false,
       description: "Gas",
     ),
@@ -95,7 +96,7 @@ class TransactionModal {
     TransactionModal(
       modalType: getExpenseByName("Transportation"),
       amount: 10.0,
-      transactionDateTime: DateTime(2024, 11, 19, 9, 30),
+      transactionDateTime: DateTime(2024, 11, 22, 18, 0),
       isIncome: false,
       description: "Commute",
     ),
@@ -116,7 +117,7 @@ class TransactionModal {
     TransactionModal(
       modalType: getExpenseByName("Travel"),
       amount: 500.0,
-      transactionDateTime: DateTime(2024, 12, 5, 8, 0),
+      transactionDateTime: DateTime(2024, 11, 15, 14, 20),
       isIncome: false,
       description: "Vacation",
     ),
@@ -137,7 +138,7 @@ class TransactionModal {
     TransactionModal(
       modalType: getExpenseByName("Dining Out"),
       amount: 25.0,
-      transactionDateTime: DateTime(2024, 11, 23, 20, 30),
+      transactionDateTime: DateTime(2024, 11, 26, 11, 15),
       isIncome: false,
       description: "Restaurant",
     ),
@@ -179,7 +180,7 @@ class TransactionModal {
     TransactionModal(
       modalType: getExpenseByName("Rent"),
       amount: 1200.0,
-      transactionDateTime: DateTime(2024, 12, 1),
+      transactionDateTime: DateTime(2024, 12, 6, 9, 0),
       isIncome: true,
       description: "Housing",
     ),

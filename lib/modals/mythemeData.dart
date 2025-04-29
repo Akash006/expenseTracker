@@ -42,6 +42,7 @@ class MyThemeData {
         shadowColor: Colors.grey,
       ),
     ),
+
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.w900),
       displayMedium: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.w900),
@@ -78,10 +79,9 @@ class MyThemeData {
     ),
 
     listTileTheme: const ListTileThemeData(
-      tileColor: Colors.blue,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
-      textColor: Colors.white,
-      iconColor: Colors.white,
+      // tileColor: Colors.black,
+      textColor: Colors.black,
+      iconColor: Colors.black,
       titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     ),
 

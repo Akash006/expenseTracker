@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 import 'package:expense_tracker/modals/transcationModal.dart';
 
 // Data class to represent a transaction
@@ -26,51 +26,6 @@ class TransactionScreen extends StatefulWidget {
 
 class _TransactionScreenState extends State<TransactionScreen> {
   // Sample transaction data
-  final List<Transaction> _transactions = [
-    Transaction(
-        id: 1,
-        description: "Salary",
-        amount: 5000.0,
-        isIncome: true,
-        date: DateTime.now().subtract(Duration(days: 1))),
-    Transaction(
-        id: 2,
-        description: "Groceries",
-        amount: 200.0,
-        isIncome: false,
-        date: DateTime.now().subtract(Duration(days: 2))),
-    Transaction(
-        id: 3,
-        description: "Bonus",
-        amount: 1000.0,
-        isIncome: true,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-        id: 4,
-        description: "Dinner",
-        amount: 50.0,
-        isIncome: false,
-        date: DateTime.now().subtract(Duration(days: 4))),
-    Transaction(
-        id: 5,
-        description: "Rent",
-        amount: 1500.0,
-        isIncome: false,
-        date: DateTime.now().subtract(Duration(days: 5))),
-    Transaction(
-        id: 6,
-        description: "Freelance",
-        amount: 800.0,
-        isIncome: true,
-        date: DateTime.now().subtract(Duration(days: 6))),
-    Transaction(
-        id: 7,
-        description: "Shopping",
-        amount: 300.0,
-        isIncome: false,
-        date: DateTime.now().subtract(Duration(days: 7))),
-  ];
-
   @override
   Widget build(BuildContext context) {
     // Calculate total income and expense
@@ -80,6 +35,9 @@ class _TransactionScreenState extends State<TransactionScreen> {
     final double totalExpense = TransactionModal.transactionList
         .where((transaction) => !transaction.isIncome)
         .fold(0, (sum, transaction) => sum + transaction.amount);
+
+    final sortedTransactions = TransactionModal.groupTransactionsByDate();
+    final groupedEntries = sortedTransactions.entries.toList();
 
     return Scaffold(
       body: CustomScrollView(
@@ -139,10 +97,16 @@ class _TransactionScreenState extends State<TransactionScreen> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                final transaction = TransactionModal.transactionList[index];
-                return TransactionItem(transaction: transaction);
+                // TransactionModal.groupTransactionsByDate();
+                final entry = groupedEntries[index];
+                final date = entry.key;
+                final transactions = entry.value;
+                return TransactionItem(
+                  transactionList: transactions,
+                  date: date,
+                );
               },
-              childCount: TransactionModal.transactionList.length,
+              childCount: groupedEntries.length,
             ),
           ),
         ],
@@ -152,58 +116,61 @@ class _TransactionScreenState extends State<TransactionScreen> {
 }
 
 class TransactionItem extends StatelessWidget {
-  final TransactionModal transaction;
+  final List <TransactionModal> transactionList;
+  final DateTime date;
 
-  const TransactionItem({Key? key, required this.transaction})
+  const TransactionItem(
+      {Key? key,
+        required this.transactionList,
+        required this.date,
+      })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       elevation: 4.0, // Add shadow
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0), // Rounded corners
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Icon(
-              transaction.modalType.iconName,
-              size: 28,
-              color: transaction.modalType.colorName,
-            ),
-            SizedBox(width: 16.0),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    transaction.description,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500, fontSize: 16), // Medium
-                  ),
-                  SizedBox(height: 4.0),
-                  Text(
-                    DateFormat('dd MMM yyyy')
-                        .format(transaction.transactionDateTime),
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            Text(
-              '${transaction.isIncome ? "+" : "-"}\$${transaction.amount.toStringAsFixed(2)}',
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            child: Text(DateFormat('dd-MMM-yyyy EEE').format(date),
               style: TextStyle(
-                color: transaction.isIncome ? Colors.green : Colors.red,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w700
               ),
             ),
-          ],
-        ),
+          ),
+          ...transactionList.map((transaction){
+            return ListTile(
+              leading: Icon(
+                  transaction.modalType.iconName,
+                size: 26,
+              ),
+              title: Text(transaction.modalType.name),
+              subtitle: Text(transaction.description),
+              trailing: Text(
+                  "\$ "+transaction.amount.toString(),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            );
+          }).toList(),
+          SizedBox(
+            height: 12,
+            child: Divider(
+              thickness: 1,
+              color: Colors.grey.shade400,
+            ),
+          ),
+        ]
       ),
     );
   }
