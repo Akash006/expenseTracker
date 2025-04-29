@@ -109,7 +109,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   )
                 ],
                 elevation: 8,
-                iconSize: 35,
+                iconSize: 28,
                 currentIndex: selectedindex, // Fixed to use selected index
                 selectedItemColor: Colors.black,
                 unselectedItemColor: Colors.black54,

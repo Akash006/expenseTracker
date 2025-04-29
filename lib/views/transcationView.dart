@@ -139,26 +139,25 @@ class TransactionItem extends StatelessWidget {
           Row(
             children: [
               Container(
-                // width: double.infinity,
+                padding: const EdgeInsets.only(
+                  left: 8
+                ),
                 child: Text(DateFormat('dd-MMM-yyyy').format(date),
-                  style: TextStyle(
-                      fontSize: 18,
+                  style: const TextStyle(
+                      fontSize: 16,
                       color: Colors.black,
                       fontWeight: FontWeight.normal
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Container(
-                // width: double.infinity,
-                child: Text(DateFormat('EEE').format(date),
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w800
-                  ),
+              Text(DateFormat('EEE').format(date),
+                style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w800
                 ),
               ),
             ],
@@ -166,12 +165,18 @@ class TransactionItem extends StatelessWidget {
           ...transactionList.map((transaction){
             return ListTile(
               visualDensity: VisualDensity.compact,
-
+              minVerticalPadding: 10,
               leading: Icon(
                   transaction.modalType.iconName,
-                size: 24,
+                size: 18,
               ),
-              title: Text(transaction.modalType.name),
+              title: Text(
+                  transaction.modalType.name,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold
+                ),
+              ),
               subtitle: Text(transaction.description),
               trailing: Text(
                   "\$ "+transaction.amount.toString(),

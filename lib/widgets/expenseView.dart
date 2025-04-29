@@ -32,18 +32,23 @@ class ExpenseView extends StatelessWidget {
             context.push("/addtransaction/$view/${clickedTile.name}");
           },
           child: Card(
-            color: clickedTile.colorName,
+            color: Colors.white,
+            shadowColor: Colors.black87,
+            margin: EdgeInsets.all(2),
             elevation: 10,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  clickedTile.name,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.normal,
-                    overflow: TextOverflow.ellipsis,
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  child: Text(
+                    clickedTile.name,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 IconTheme(
