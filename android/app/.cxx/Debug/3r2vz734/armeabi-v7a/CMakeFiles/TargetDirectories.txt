@@ -1,0 +1,2 @@
+/Users/akash/StudioProjects/expenseTracker/android/app/.cxx/Debug/3r2vz734/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/akash/StudioProjects/expenseTracker/android/app/.cxx/Debug/3r2vz734/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/Users/akash/StudioProjects/expenseTracker/build/app/intermediates/cxx/Debug/3r2vz734/obj/x86_64
