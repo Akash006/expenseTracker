@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:expense_tracker/widgets/addTranscationWidget.dart';
 
 class Addtranscations extends StatelessWidget {

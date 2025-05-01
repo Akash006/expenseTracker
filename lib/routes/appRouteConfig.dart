@@ -3,6 +3,7 @@ import 'package:expense_tracker/widgets/home.dart';
 import 'package:expense_tracker/routes/appRouteConstants.dart';
 import 'package:expense_tracker/views/transcationView.dart';
 import '../views/addTranscations.dart';
+import 'package:expense_tracker/views/addTranscationForm.dart';
 import 'errorPage.dart';
 
 class MyAppRouter {
@@ -28,6 +29,16 @@ class MyAppRouter {
           return Addtranscations(type: type, category: category);
         },
       ),
+      GoRoute(
+        name: MyAppRouteConstants.addTranscationFormRouteName,
+        path: '/addTranscationForm/:expenseType/:category',
+        builder: (context, state) {
+          final expenseType = state.pathParameters['expenseType']!;
+          final category = state.pathParameters['category']!;
+          return addTranscationForm(
+              expenseType: expenseType, category: category);
+          }
+        ),
     ],
   );
 }

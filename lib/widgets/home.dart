@@ -34,7 +34,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(5.0),
                 bottomRight: Radius.circular(5.0),
@@ -62,10 +62,10 @@ class _HomeWidgetState extends State<HomeWidget> {
             children: [
               ExpenseView(
                   key: ValueKey("expense-${selectedindex}"), // Unique key
-                  view: "expense"),
+                  view: "Expense"),
               ExpenseView(
                   key: ValueKey("expense-${selectedindex}"), // Unique key
-                  view: "income"),
+                  view: "Income"),
               TransactionScreen()
             ],
           ),

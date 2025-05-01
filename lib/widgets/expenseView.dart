@@ -10,7 +10,7 @@ class ExpenseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Determine whether to show expenses or income based on `view`
-    var expense = (view == "expense") ? expenseList : incomeList;
+    var expense = (view == "Expense") ? expenseList : incomeList;
 
     return GridView.builder(
       itemCount: expense.length, // Use the correct list length
@@ -29,7 +29,7 @@ class ExpenseView extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             // Use the clicked tile's data for navigation
-            context.push("/addtransaction/$view/${clickedTile.name}");
+            context.push("/addTranscationForm/$view/${clickedTile.name}");
           },
           child: Card(
             color: Colors.white,

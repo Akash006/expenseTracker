@@ -134,6 +134,7 @@ class TransactionItem extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0), // Rounded corners
       ),
+      margin: EdgeInsets.all(4),
       child: Column(
         children: [
           Row(
@@ -165,14 +166,15 @@ class TransactionItem extends StatelessWidget {
           ...transactionList.map((transaction){
             return ListTile(
               visualDensity: VisualDensity.compact,
-              minVerticalPadding: 10,
+              minVerticalPadding: 1,
+              dense: true,
               leading: Icon(
                   transaction.modalType.iconName,
-                size: 18,
+                size: 22,
               ),
               title: Text(
                   transaction.modalType.name,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold
                 ),
