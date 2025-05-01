@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/views/transcationView.dart';
 import 'expenseView.dart';
+import 'incomeView.dart';
 
 class HomeWidget extends StatefulWidget {
   HomeWidget({super.key});
@@ -63,7 +64,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               ExpenseView(
                   key: ValueKey("expense-${selectedindex}"), // Unique key
                   view: "Expense"),
-              ExpenseView(
+              IncomeView(
                   key: ValueKey("expense-${selectedindex}"), // Unique key
                   view: "Income"),
               TransactionScreen()
