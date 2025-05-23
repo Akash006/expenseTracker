@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:expense_tracker/views/transcationView.dart';
+import 'package:flutter/material.dart';
+
+import 'categoryForm.dart';
 import 'expenseView.dart';
-import 'incomeView.dart';
 
 class HomeWidget extends StatefulWidget {
   HomeWidget({super.key});
@@ -22,6 +23,15 @@ class _HomeWidgetState extends State<HomeWidget> {
     });
   }
 
+  void _addCategory(BuildContext context) {
+    print("Add Category");
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => CategoryForm(),
+    );
+  }
+
   @override
   void dispose() {
     pageController.dispose(); // Dispose of PageController
@@ -32,15 +42,14 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return DefaultTabController(
         initialIndex: 1,
-        length: 4,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(5.0),
-                bottomRight: Radius.circular(5.0),
-              )
-            ),
+                borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(5.0),
+              bottomRight: Radius.circular(5.0),
+            )),
             title: const Text(
               'Expense Tracker',
               style: TextStyle(
@@ -64,9 +73,6 @@ class _HomeWidgetState extends State<HomeWidget> {
               ExpenseView(
                   key: ValueKey("expense-${selectedindex}"), // Unique key
                   view: "Expense"),
-              IncomeView(
-                  key: ValueKey("expense-${selectedindex}"), // Unique key
-                  view: "Income"),
               TransactionScreen()
             ],
           ),
@@ -96,13 +102,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.monetization_on,
-                      color: Colors.black87,
-                    ),
-                    label: 'Income',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(
                       Icons.menu_book_outlined,
                       color: Colors.black87,
                     ),
@@ -119,6 +118,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                 type: BottomNavigationBarType.fixed,
               ),
             ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => _addCategory(context),
+            tooltip: "Add Category",
+            backgroundColor: Colors.white,
+            elevation: 12,
+            child: Icon(
+              Icons.add,
+              color: Colors.black87,
+            ),
+            hoverColor: Colors.grey,
           ),
         ));
   }
