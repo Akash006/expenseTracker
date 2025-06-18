@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'routes/appRouteConfig.dart';
-import 'package:provider/provider.dart';
-import 'package:expense_tracker/modals/themeProvider.dart';
+import 'package:expense_tracker/database/createDatabase.dart';
 import 'package:expense_tracker/modals/mythemeData.dart';
+import 'package:expense_tracker/modals/themeProvider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+import 'routes/appRouteConfig.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DBHelper.getInstance.getDB();
   runApp(const MyApp());
 }
 

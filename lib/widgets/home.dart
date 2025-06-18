@@ -1,6 +1,7 @@
 import 'package:expense_tracker/views/transcationView.dart';
 import 'package:flutter/material.dart';
 
+import '../database/createDatabase.dart';
 import 'categoryForm.dart';
 import 'expenseView.dart';
 
@@ -15,6 +16,20 @@ class _HomeWidgetState extends State<HomeWidget> {
   int selectedindex = 0;
 
   final PageController pageController = PageController();
+  DBHelper myDB = DBHelper.getInstance;
+  List<Map<String, dynamic>> categoryData = [];
+
+  void initState() {
+    super.initState();
+    getCategories();
+  }
+
+  void getCategories() async {
+    List<Map<String, dynamic>> categoryData = await myDB.getCategoryDB();
+    setState(() {
+      this.categoryData = categoryData;
+    });
+  }
 
   void onTapped(int index) {
     setState(() {
@@ -24,12 +39,15 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 
   void _addCategory(BuildContext context) {
-    print("Add Category");
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) => CategoryForm(),
-    );
+    ).then((_) {
+      setState(() {
+        getCategories();
+      });
+    });
   }
 
   @override
@@ -71,8 +89,9 @@ class _HomeWidgetState extends State<HomeWidget> {
             },
             children: [
               ExpenseView(
-                  key: ValueKey("expense-${selectedindex}"), // Unique key
-                  view: "Expense"),
+                key: ValueKey("expense-${selectedindex}"), // Unique key
+                categoryData: categoryData,
+              ),
               TransactionScreen()
             ],
           ),

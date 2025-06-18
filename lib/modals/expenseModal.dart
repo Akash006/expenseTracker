@@ -26,7 +26,8 @@ ExpenseModal getExpenseByName(String name) {
 final List<ExpenseModal> expenseList = [
   ExpenseModal(
     name: "Groceries",
-    iconName: Icons.shopping_cart,
+    // iconName: Icons.shopping_cart,
+    iconName: IconData(57374, fontFamily: 'MaterialIcons'),
     colorName: Colors.teal.shade200,
   ),
   ExpenseModal(

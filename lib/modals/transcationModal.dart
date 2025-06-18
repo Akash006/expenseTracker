@@ -7,7 +7,6 @@ class TransactionModal {
   final bool isIncome;
   final String description;
 
-
   TransactionModal({
     required this.modalType,
     required this.amount,
@@ -52,7 +51,7 @@ class TransactionModal {
 
   static List<TransactionModal> transactionList = [
     TransactionModal(
-      modalType: getExpenseByName("Groceries"),
+      modalType: getExpenseByName("Fuel"),
       amount: 50.0,
       transactionDateTime: DateTime(2024, 11, 25, 10, 30),
       isIncome: false,
@@ -192,5 +191,4 @@ class TransactionModal {
       description: "Trip",
     ),
   ];
-
 }

@@ -44,11 +44,16 @@ class MyThemeData {
     ),
 
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.w900),
-      displayMedium: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.w900),
-      displaySmall: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w900),
-      headlineMedium: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w700),
-      headlineSmall: TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
+      displayLarge: TextStyle(
+          fontSize: 28, color: Colors.black, fontWeight: FontWeight.w900),
+      displayMedium: TextStyle(
+          fontSize: 24, color: Colors.black, fontWeight: FontWeight.w900),
+      displaySmall: TextStyle(
+          fontSize: 20, color: Colors.black, fontWeight: FontWeight.w900),
+      headlineMedium: TextStyle(
+          fontSize: 18, color: Colors.black, fontWeight: FontWeight.w700),
+      headlineSmall: TextStyle(
+          fontSize: 16, color: Colors.black, fontWeight: FontWeight.w700),
       titleLarge: TextStyle(fontSize: 18, color: Colors.black),
       titleMedium: TextStyle(fontSize: 16, color: Colors.black),
       titleSmall: TextStyle(fontSize: 14, color: Colors.black),
@@ -72,11 +77,11 @@ class MyThemeData {
       ),
     ),
 
-    cardTheme: const CardTheme(
-      color: Colors.blue,
-      shadowColor: Colors.white12,
-      elevation: 26,
-    ),
+    // cardTheme: CardTheme(
+    //   color: Colors.blue,
+    //   shadowColor: Colors.white12,
+    //   elevation: 26,
+    // ),
 
     listTileTheme: const ListTileThemeData(
       // tileColor: Colors.black,
@@ -89,17 +94,12 @@ class MyThemeData {
       elevation: 8,
     ),
 
-    dividerTheme: DividerThemeData(
-        color: Colors.grey,
-        thickness: 1,
-        space: 2
-    ),
+    dividerTheme: DividerThemeData(color: Colors.grey, thickness: 1, space: 2),
   );
 
   ThemeData darkMode = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.grey[900],
-
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.light,
       // backgroundColor: Colors.indigo.shade800,
@@ -126,7 +126,6 @@ class MyThemeData {
     ).copyWith(
       secondary: Colors.purple,
     ),
-
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         backgroundColor: Colors.indigo,
@@ -136,7 +135,6 @@ class MyThemeData {
         shadowColor: Colors.grey,
       ),
     ),
-
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
@@ -146,46 +144,45 @@ class MyThemeData {
         textStyle: const TextStyle(fontSize: 18),
       ),
     ),
-
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 28, color: Colors.white, fontWeight: FontWeight.w900),
-      displayMedium: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.w900),
-      displaySmall: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w900),
-      headlineMedium: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
-      headlineSmall: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w700),
+      displayLarge: TextStyle(
+          fontSize: 28, color: Colors.white, fontWeight: FontWeight.w900),
+      displayMedium: TextStyle(
+          fontSize: 24, color: Colors.white, fontWeight: FontWeight.w900),
+      displaySmall: TextStyle(
+          fontSize: 20, color: Colors.white, fontWeight: FontWeight.w900),
+      headlineMedium: TextStyle(
+          fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
+      headlineSmall: TextStyle(
+          fontSize: 16, color: Colors.white, fontWeight: FontWeight.w700),
       titleLarge: TextStyle(fontSize: 14, color: Colors.white),
       titleMedium: TextStyle(fontSize: 16, color: Colors.white),
       titleSmall: TextStyle(fontSize: 16, color: Colors.white),
       bodyLarge: TextStyle(fontSize: 16, color: Colors.white),
       bodyMedium: TextStyle(fontSize: 14, color: Colors.white),
     ),
-
     iconTheme: const IconThemeData(color: Colors.indigoAccent),
-
     snackBarTheme: const SnackBarThemeData(
       elevation: 8,
       backgroundColor: Colors.white,
       actionTextColor: Colors.black,
     ),
-
     listTileTheme: const ListTileThemeData(
       tileColor: Colors.indigo,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20))),
       textColor: Colors.white,
       iconColor: Colors.white,
       titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     ),
-
     drawerTheme: DrawerThemeData(
       elevation: 8,
       backgroundColor: Colors.grey[900],
     ),
-
-    cardTheme: const CardTheme(
-      color: Colors.indigo,
-      shadowColor: Colors.white10,
-      elevation: 12,
-    ),
-
+    // cardTheme: const CardTheme(
+    //   color: Colors.indigo,
+    //   shadowColor: Colors.white10,
+    //   elevation: 12,
+    // ),
   );
 }

@@ -12,7 +12,7 @@ class DBHelper {
   Database? myDB;
 
   Future<Database> getDB() async {
-    myDB ?? await openDB();
+    myDB ??= await openDB();
     return myDB!;
 
     // if (myDB != null) {
@@ -24,13 +24,36 @@ class DBHelper {
   }
 
   Future<Database> openDB() async {
-    Directory appDir = await getApplicationCacheDirectory();
+    Directory appDir = await getApplicationDocumentsDirectory();
     String dbPath = join(appDir.path, "tracker.db");
 
     return await openDatabase(dbPath, onCreate: (db, version) {
       // DB Tables
       db.execute(
-          "Create table category_table (category_id INTEGER PRIMARY KEY AUTO_INCREMENT, name Text, icon_name Text, ledger_name Text)");
+          "CREATE TABLE category_table (category_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, icon_name INTEGER, icon_family TEXT, ledger_name TEXT)");
     }, version: 1);
+  }
+
+  Future<List<Map<String, dynamic>>> getCategoryDB() async {
+    var db = await getDB();
+    List<Map<String, dynamic>> mdata = await db.query("category_table");
+    return mdata;
+  }
+
+  Future<bool> insertCategoryDB({
+    required categoryName,
+    required categoryIconName,
+    required categoryFamily,
+    categoryLedgerName = "default",
+  }) async {
+    var db = await getDB();
+    int rowEffected = await db.insert("category_table", {
+      "name": categoryName,
+      "icon_name": categoryIconName,
+      "icon_family": categoryFamily,
+      "ledger_name": categoryLedgerName
+    });
+
+    return rowEffected > 0;
   }
 }
