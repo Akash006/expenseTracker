@@ -54,17 +54,17 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Icon(
-                        Icons.arrow_upward,
-                        color: Colors.green,
-                        size: 24,
+                      Icons.arrow_upward,
+                      color: Colors.green,
+                      size: 24,
                     ),
                     SizedBox(width: 4.0),
                     Text(
                       'Income: \$${totalIncome.toStringAsFixed(2)}',
                       style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
                       ),
                     ),
                   ],
@@ -76,17 +76,17 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                        Icons.arrow_downward,
-                        color: Colors.red,
-                        size: 24,
+                      Icons.arrow_downward,
+                      color: Colors.red,
+                      size: 24,
                     ),
                     SizedBox(width: 4.0),
                     Text(
                       'Expense: \$${totalExpense.toStringAsFixed(2)}',
                       style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
                       ),
                     ),
                   ],
@@ -116,15 +116,14 @@ class _TransactionScreenState extends State<TransactionScreen> {
 }
 
 class TransactionItem extends StatelessWidget {
-  final List <TransactionModal> transactionList;
+  final List<TransactionModal> transactionList;
   final DateTime date;
 
-  const TransactionItem(
-      {Key? key,
-        required this.transactionList,
-        required this.date,
-      })
-      : super(key: key);
+  const TransactionItem({
+    Key? key,
+    required this.transactionList,
+    required this.date,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,69 +134,59 @@ class TransactionItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0), // Rounded corners
       ),
       margin: EdgeInsets.all(4),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  left: 8
-                ),
-                child: Text(DateFormat('dd-MMM-yyyy').format(date),
-                  style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(DateFormat('EEE').format(date),
+      child: Column(children: [
+        Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(
+                DateFormat('dd-MMM-yyyy').format(date),
                 style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     color: Colors.black,
-                    fontWeight: FontWeight.w800
-                ),
+                    fontWeight: FontWeight.normal),
               ),
-            ],
-          ),
-          ...transactionList.map((transaction){
-            return ListTile(
-              visualDensity: VisualDensity.compact,
-              minVerticalPadding: 1,
-              dense: true,
-              leading: Icon(
-                  transaction.modalType.iconName,
-                size: 22,
-              ),
-              title: Text(
-                  transaction.modalType.name,
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold
-                ),
-              ),
-              subtitle: Text(transaction.description),
-              trailing: Text(
-                  "\$ "+transaction.amount.toString(),
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-            );
-          }).toList(),
-          SizedBox(
-            height: 12,
-            child: Divider(
-              thickness: 1,
-              color: Colors.grey.shade400,
             ),
-          ),
-        ]
-      ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              DateFormat('EEE').format(date),
+              style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800),
+            ),
+          ],
+        ),
+        ...transactionList.map((transaction) {
+          return ListTile(
+            visualDensity: VisualDensity.compact,
+            minVerticalPadding: 1,
+            dense: true,
+            leading: Icon(
+              transaction.modalType.iconName,
+              size: 22,
+            ),
+            title: Text(
+              transaction.modalType.name,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(transaction.description),
+            trailing: Text(
+              "\$ " + transaction.amount.toString(),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          );
+        }).toList(),
+        SizedBox(
+          height: 12,
+          // child: Divider(
+          //   thickness: 1,
+          //   color: Colors.grey.shade400,
+          // ),
+        ),
+      ]),
     );
   }
 }
